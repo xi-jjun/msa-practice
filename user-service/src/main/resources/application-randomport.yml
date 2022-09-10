@@ -1,0 +1,17 @@
+server:
+  #  port: 9001
+  port: 0 # random port
+
+spring:
+  application:
+    name: user-service
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+
+  client:
+    register-with-eureka: true
+    fetch-registry: true # eureka server 로 부터 instance 들의 정보를 주기적으로 가져오겠다는 뜻
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka # 우리가 등록할 server
